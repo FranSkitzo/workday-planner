@@ -31,7 +31,7 @@ else {
 }
 
 grabData();
-checkToday()
+checkDay()
 
 function allFuture() {
     for (i = 1; i < classes.length; i++) {
