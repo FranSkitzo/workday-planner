@@ -47,3 +47,66 @@ function allPast() {
     $(classes[time.length - 1]).addClass("present");
 }
 
+function formatTimes() {
+    $(classes[classIndex]).addClass("present");
+    for (i - 0; i < classIndex; i++) {
+        $(classes[i]).addClass("past");
+    }
+    for (i = classIndex + 1; i < classes.length; i++) {
+        $(classes[i]).addClass("future");
+    }
+}
+
+$(".saveBtn").on("click", function() {
+    var di = $(this).data('index');
+    allNotes[di] = $(classes[di]).val();
+    localStorage.setItem('allNotes', JSON.stringify(allNotes))
+    alert("Saved")
+})
+
+function grabData() {
+    allNotes = JOSN.parse(localStorage.getItem("allNotes"));
+    if (allNotes == null) {
+        allNotes = ["", "", "", "", "", "", "", "", "", "", ""];
+        return;
+    }
+    for (i = 0; i < classes.length; i++) {
+        ($(classes[i])).val(allNotes[i]);
+    }
+}
+
+$(".cleary").on("click", function() {
+    cleardata()
+})
+
+function cleardata() {
+    var confirmDelete = confirm("Are you sure you want to clear all data?");
+    if (confirmDelete == true) {
+        allNotes = ["", "", "", "", "", "", "", "", "", "", ""];
+        localStorage.setItem('allNotes', JSON.stringify(allNotes));
+        grabData();
+    }
+}
+
+function checkDay() {
+    var dateSet = localStorage.getItem("date");
+    if (dateSet == null) {
+        localStorage.setItem('date', checkToday);
+    }
+    else if (checkToday !== dateSet) {
+        localStorage.setItem('date', checkToday);
+        var confirmNewDay = confirm("It's a new day, would you like to clear the calender")
+        if (confirmNewDay == true) {
+            cleardata()
+            localStorage.setItem('date', checkToday);
+        }
+    }
+}
+
+$(".savey").on("click", function() {
+    for (i = 0; i < classes.length; i++) {
+        allNotes[i] = $(classes[i]).val();
+    }
+    localStorage.setItem('allNotes', JSON.stringify(allNotes))
+    alert("All Data Saved")
+})
