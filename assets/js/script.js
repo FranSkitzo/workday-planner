@@ -49,7 +49,7 @@ function allPast() {
 
 function formatTimes() {
     $(classes[classIndex]).addClass("present");
-    for (i - 0; i < classIndex; i++) {
+    for (i = 0; i < classIndex; i++) {
         $(classes[i]).addClass("past");
     }
     for (i = classIndex + 1; i < classes.length; i++) {
@@ -65,7 +65,7 @@ $(".saveBtn").on("click", function() {
 })
 
 function grabData() {
-    allNotes = JOSN.parse(localStorage.getItem("allNotes"));
+    allNotes = JSON.parse(localStorage.getItem("allNotes"));
     if (allNotes == null) {
         allNotes = ["", "", "", "", "", "", "", "", "", "", ""];
         return;
